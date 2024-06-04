@@ -31,3 +31,11 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     restart: unless-stopped
+
+  app:
+    image: python:3.8-slim-buster
+    volumes:
+      - ./:/app
+    command: bash -c "cd app && pip install -r requirements.txt && python app.py"
+    depends_on:
+      - ollama
